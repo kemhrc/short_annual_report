@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KEMHRC — Brief Annual Report FY2025–26</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1EF;
+    --sheet:#FFFFFF;
+    --ink:#122B3E;
+    --ink-soft:#51697A;
+    --ink-faint:#8DA0AC;
+    --teal:#0E6E6A;
+    --teal-deep:#0A4F4C;
+    --teal-light:#D9EBE9;
+    --coral:#D8492E;
+    --coral-light:#F7E1DA;
+    --amber:#BD8A1F;
+    --amber-light:#F3E6C8;
+    --line:#DEE5E2;
+    --line-strong:#B9C6C2;
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    font-family:var(--sans);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    padding:36px 0 80px;
+  }
+
+  /* ============ PAGE SHELL ============ */
+  .page{
+    width:210mm;
+    min-height:297mm;
+    background:var(--sheet);
+    margin:0 auto 28px;
+    box-shadow:0 1px 3px rgba(18,43,62,0.08), 0 12px 32px rgba(18,43,62,0.10);
+    position:relative;
+    padding:16mm 15mm 14mm;
+    display:flex;
+    flex-direction:column;
+  }
+  .page::before{ /* running header */
+    content:attr(data-kicker);
+    position:absolute;
+    top:8mm; left:15mm; right:15mm;
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:8px;
+    letter-spacing:0.08em;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    border-bottom:1px solid var(--line);
+    padding-bottom:4px;
+  }
+  .page[data-kicker]::before{
+    content:attr(data-kicker) " · KEMHRC BRIEF ANNUAL REPORT · FY2025–26";
+  }
+  .page::after{ /* page number */
+    content:attr(data-page);
+    position:absolute;
+    bottom:8mm; right:15mm;
+    font-family:var(--mono);
+    font-size:8px;
+    color:var(--ink-faint);
+    letter-spacing:0.06em;
+  }
+  .page[data-page=""]::after,
+  .page:not([data-page])::after{ content:none; }
+  .page[data-kicker=""]::before, .page:not([data-kicker])::before{ content:none; border:none; }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--coral);
+    display:inline-block;
+  }
+  h1{ font-family:var(--serif); font-weight:600; }
+  h2.section-title{
+    font-family:var(--serif);
+    font-size:26px;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+    line-height:1.15;
+  }
+  .section-sub{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    max-width:110mm;
+    line-height:1.5;
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:12px;
+    margin-bottom:18px;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:34px;
+    color:var(--line-strong);
+    font-weight:600;
+    line-height:1;
+  }
+
+  /* ============ VITALS STRIP (signature element) ============ */
+  .vitals{
+    display:flex;
+    border:1px solid var(--line-strong);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .vital{
+    flex:1;
+    padding:10px 14px;
+    border-right:1px solid var(--line);
+    position:relative;
+  }
+  .vital:last-child{ border-right:none; }
+  .vital::before{
+    content:"";
+    position:absolute; top:0; left:0;
+    width:100%; height:2px;
+    background:var(--teal);
+  }
+  .vital .v-num{
+    font-family:var(--mono);
+    font-size:20px;
+    font-weight:600;
+    color:var(--ink);
+    display:flex;
+    align-items:baseline;
+    gap:4px;
+  }
+  .vital .v-trend{
+    font-size:10px;
+    font-family:var(--mono);
+    color:var(--teal);
+    font-weight:600;
+  }
+  .vital .v-trend.down{ color:var(--coral); }
+  .vital .v-label{
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin-top:3px;
+  }
+
+  /* ============ MISC UI ============ */
+  .legend-dot{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:9.5px; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .legend-dot i{ width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .legend-row{ display:flex; gap:16px; flex-wrap:wrap; }
+
+  .callout-num{
+    font-family:var(--mono);
+    font-weight:600;
+    color:var(--ink);
+    line-height:1;
+  }
+
+  table.data-table{ width:100%; border-collapse:collapse; font-size:11px; }
+  table.data-table th{
+    text-align:left;
+    font-family:var(--mono);
+    font-size:8.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    border-bottom:1.5px solid var(--ink);
+    padding:6px 8px;
+    font-weight:600;
+  }
+  table.data-table td{
+    padding:6px 8px;
+    border-bottom:1px solid var(--line);
+    color:var(--ink);
+  }
+  table.data-table tr:last-child td,
+  table.data-table tr.total-row td{ border-bottom:2px solid var(--ink); font-weight:700; background:var(--teal-light); }
+  table.data-table td.num, table.data-table th.num{ font-family:var(--mono); text-align:right; }
+  table.data-table tr.year-start td{ padding-top:10px; }
+
+  .card{
+    border:1px solid var(--line-strong);
+    border-radius:3px;
+    padding:14px 16px;
+    background:#FDFDFC;
+  }
+  .card-title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:15px;
+    color:var(--ink);
+    margin-bottom:4px;
+  }
+  .card .tag{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    padding:2px 6px;
+    border-radius:2px;
+    margin-bottom:8px;
+    font-weight:600;
+  }
+  .tag.gold{ background:var(--amber-light); color:var(--amber); }
+  .tag.teal{ background:var(--teal-light); color:var(--teal-deep); }
+  .tag.coral{ background:var(--coral-light); color:var(--coral); }
+
+  p.body-text{ font-size:11.5px; line-height:1.65; color:var(--ink-soft); }
+  p.body-text b{ color:var(--ink); font-weight:600; }
+
+  .foot-note{
+    margin-top:auto;
+    padding-top:10px;
+    border-top:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:8px;
+    color:var(--ink-faint);
+    letter-spacing:0.04em;
+  }
+
+  .rflex{ display:flex; }
+  .rflex > *{ flex:1; min-width:0; }
+
+  /* ============ ICONS ============ */
+  .page{ overflow:hidden; }
+  .page::before, .page::after{ z-index:3; }
+  .page > *:not(.bg-icon){ position:relative; z-index:1; }
+  .bg-icon{
+    position:absolute;
+    width:300px; height:300px;
+    right:-30px; bottom:-30px;
+    color:var(--teal);
+    opacity:0.05;
+    pointer-events:none;
+    z-index:0;
+  }
+  .page[data-icon="pulse"] .bg-icon{ width:420px; height:420px; right:-60px; bottom:40px; opacity:0.06; }
+  .head-icon{
+    width:23px; height:23px;
+    display:inline-block;
+    vertical-align:-6px;
+    margin-right:9px;
+    color:var(--teal);
+    flex-shrink:0;
+  }
+  .cover-graphic{
+    width:100%;
+    height:132px;
+    margin-top:24px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(90deg, var(--teal-light), #fff 48%, var(--coral-light));
+  }
+  .cover-graphic svg{ display:block; width:100%; height:100%; }
+
+  /* ============ CARD HOVER ============ */
+  .card{ transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .card:hover{ transform:translateY(-3px); box-shadow:0 8px 20px rgba(18,43,62,0.10); border-color:var(--teal); }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal{
+    opacity:0;
+    transform:translateY(16px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.19,1,.22,1);
+    transition-delay: var(--d, 0s);
+  }
+  .page.in .reveal{ opacity:1; transform:none; }
+
+  /* ============ CHART DRAW-IN ============ */
+  .bar-seg{
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    transform: scaleX(0);
+    transition: transform 1s cubic-bezier(.16,.8,.24,1);
+    transition-delay: .25s;
+  }
+  .bar-vert{
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    transform: scaleY(0);
+    transition: transform .9s cubic-bezier(.16,.8,.24,1);
+    transition-delay: .25s;
+  }
+  .page.in .bar-seg, .page.in .bar-vert{ transform:scaleX(1); }
+  .page.in .bar-vert{ transform:scaleY(1); }
+  .dot-anim{
+    transform-box: fill-box; transform-origin:50% 50%;
+    transform:scale(0);
+    transition: transform .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .page.in .dot-anim{ transform:scale(1); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .bar-seg, .bar-vert, .dot-anim{ transition:none !important; opacity:1 !important; transform:none !important; }
+  }
+  @media print{
+    .reveal, .bar-seg, .bar-vert, .dot-anim{ transition:none !important; opacity:1 !important; transform:none !important; }
+    .bg-icon{ opacity:0.045; }
+    .card:hover{ transform:none; box-shadow:none; }
+  }
+
+  @media print{
+    body{ background:#fff; padding:0; }
+    .page{ box-shadow:none; margin:0; page-break-after:always; }
+  }
+  @media screen and (max-width: 900px){
+    .page{ width:100%; min-height:auto; padding:8vw 6vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<section class="page" data-kicker="" data-page="" data-icon="pulse">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <div class="eyebrow">Annual Report · FY2025–26</div>
+    <div style="font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-align:right; line-height:1.6;">
+      DOC REF KEMHRC/AR/25–26<br>PUNE, MAHARASHTRA, INDIA
+    </div>
+  </div>
+
+  <div style="margin-top:58px;">
+    <div style="font-family:var(--mono); font-size:11px; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:10px;">
+      KEM Hospital Research Centre, Pune
+    </div>
+    <h1 style="font-size:56px; line-height:1.04; letter-spacing:-0.015em; max-width:150mm;">
+      Annual Report<br><span style="color:var(--teal);">2025–26</span>
+    </h1>
+    <p style="font-family:var(--sans); font-size:13px; color:var(--ink-soft); max-width:110mm; margin-top:18px; line-height:1.6;">
+      Advancing knowledge for healthier lives through clinical research, community health,
+      scholarship, training, and partnerships.
+    </p>
+  </div>
+
+  <div class="cover-graphic" aria-label="Research ecosystem graphic">
+    <svg viewBox="0 0 900 132" role="img" aria-label="Research ecosystem connecting studies, people, publications, communities, and partners">
+      <g fill="none" stroke="#0E6E6A" stroke-width="1.5" opacity="0.32">
+        <path d="M70 92 C190 24 250 38 350 68 S520 110 630 45 S770 26 850 72"/>
+        <path d="M125 32 C225 80 305 94 410 42 S600 18 735 91" stroke="#D8492E"/>
+        <path d="M235 18 L350 68 L470 112 L630 45 L760 72" stroke="#BD8A1F"/>
+      </g>
+      <g font-family="var(--mono)" font-size="9" text-anchor="middle">
+        <g><circle cx="70" cy="92" r="13" fill="#0E6E6A"/><text x="70" y="95" fill="#fff">47</text><text x="70" y="119" fill="#51697A">STUDIES</text></g>
+        <g><circle cx="235" cy="18" r="13" fill="#D8492E"/><text x="235" y="21" fill="#fff">271</text><text x="235" y="8" fill="#51697A">PEOPLE</text></g>
+        <g><circle cx="350" cy="68" r="13" fill="#BD8A1F"/><text x="350" y="71" fill="#fff">63</text><text x="350" y="98" fill="#51697A">PAPERS</text></g>
+        <g><circle cx="470" cy="112" r="13" fill="#0E6E6A"/><text x="470" y="115" fill="#fff">64</text><text x="470" y="130" fill="#51697A">VILLAGES</text></g>
+        <g><circle cx="630" cy="45" r="13" fill="#D8492E"/><text x="630" y="48" fill="#fff">54</text><text x="630" y="24" fill="#51697A">PARTNERS</text></g>
+        <g><circle cx="760" cy="72" r="13" fill="#BD8A1F"/><text x="760" y="75" fill="#fff">11</text><text x="760" y="101" fill="#51697A">CSR</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- signature vitals strip -->
+  <div class="vitals" style="margin-top:44px;">
+    <div class="vital">
+      <div class="v-num"><span class="count" data-count="47">0</span> <span class="v-trend">ACTIVE</span></div>
+      <div class="v-label">Total studies, FY25–26</div>
+    </div>
+    <div class="vital">
+      <div class="v-num"><span class="count" data-count="271">0</span> <span class="v-trend">↑ 19%</span></div>
+      <div class="v-label">Staff strength, FY25–26</div>
+    </div>
+    <div class="vital">
+      <div class="v-num"><span class="count" data-count="63">0</span> <span class="v-trend">↑ 47%</span></div>
+      <div class="v-label">Publications, FY25–26</div>
+    </div>
+    <div class="vital">
+      <div class="v-num"><span class="count" data-count="54">0</span> <span class="v-trend">↑ 13%</span></div>
+      <div class="v-label">Active collaborators</div>
+    </div>
+    <div class="vital">
+      <div class="v-num"><span class="count" data-count="11">0</span></div>
+      <div class="v-label">CSR partners engaged</div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px; border-top:1px solid var(--line); padding-top:10px;">
+    <div class="eyebrow" style="margin-bottom:6px;">Institute Registrations and Accreditation</div>
+    <div class="rflex" style="gap:8px; align-items:stretch;">
+      <div class="card" style="padding:9px 10px;">
+        <div class="tag coral" style="margin-bottom:5px;">Institute registration</div>
+        <div class="card-title" style="font-size:12px;">Department of Scientific and Industrial Research (DSIR) Recognition</div>
+        <p class="body-text" style="font-size:9.5px; margin-top:3px;">Recognition renewal valid through <b>31 March 2029</b>.</p>
+      </div>
+      <div class="card" style="padding:9px 10px;">
+        <div class="tag coral" style="margin-bottom:5px;">Institute registration</div>
+        <div class="card-title" style="font-size:12px;">NABH Accreditation</div>
+        <p class="body-text" style="font-size:9.5px; margin-top:3px;">National Accreditation Board for Hospitals &amp; Healthcare Providers (NABH) renewal accreditation valid until <b>July 2026–2027</b>.</p>
+      </div>
+      <div class="card" style="padding:9px 10px;">
+        <div class="tag coral" style="margin-bottom:5px;">Social registration</div>
+        <div class="card-title" style="font-size:12px;">Social Stock Exchange (BSE-SSE)</div>
+        <p class="body-text" style="font-size:9.5px; margin-top:3px;">Registered on <b>20 May 2026</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px; border-top:1px solid var(--line); padding-top:9px;">
+    <div class="eyebrow" style="margin-bottom:7px;">Trustees</div>
+    <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px 8px; text-align:center;">
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/dr%20sivaram%20sir.webp" alt="Dr. Swaminathan Sivaram" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Chairman</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Dr. Swaminathan Sivaram</div>
+      </div>
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/dr%20r%20a%20mashelkar.jpg" alt="Dr. R. A. Mashelkar" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Trustee</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Dr. R. A. Mashelkar</div>
+      </div>
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/Dr.Kurus%20Coyaji.JPG" alt="Dr. K. J. Coyaji" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Trustee</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Dr. K. J. Coyaji</div>
+      </div>
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/zakiya_kurrien.jpg" alt="Ms. Zakiya Kurrien" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Trustee</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Ms. Zakiya Kurrien</div>
+      </div>
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/Mr.%20Janank%20Nabar.jpg" alt="Mr. Janak Nabar" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Treasurer</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Mr. Janak Nabar</div>
+      </div>
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/Dr_Xerxes_Coyaji.jpg" alt="Dr. Xerxes K. Coyaji" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Trustee</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Dr. Xerxes K. Coyaji</div>
+      </div>
+      <div>
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/trusteesphotos/dr.laila%20garda.jpg" alt="Dr. (Mrs.) Laila F. Garda" style="display:block; width:60px; height:60px; margin:0 auto 4px; border-radius:50%; object-fit:cover; border:2px solid var(--teal);">
+        <div style="font-family:var(--mono); font-size:7px; color:var(--teal); text-transform:uppercase;">Secretary</div>
+        <div style="font-size:8px; line-height:1.15; margin-top:2px;">Dr. (Mrs.) Laila F. Garda</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex:1; display:flex; align-items:flex-end; margin-top:36px;">
+    <div style="width:100%; border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between; align-items:flex-end;">
+      <div>
+        <div class="eyebrow" style="margin-bottom:2px;">Contents</div>
+        <div style="font-family:var(--mono); font-size:9.5px; color:var(--ink-soft); columns:2; column-gap:28px; line-height:2;">
+          01 Research portfolio<br>
+          02 Workforce &amp; scholars<br>
+          03 Scholarly output<br>
+          04 Collaborator network<br>
+          05 CSR partners<br>
+          06 Honours &amp; outputs<br>
+          07 Capacity building<br>
+          08 Featured studies<br>
+          09 Key projects<br>
+          10 Outreach
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:var(--mono); font-size:9px; color:var(--ink-faint);">SOURCE</div>
+        <div style="font-family:var(--sans); font-size:10.5px; color:var(--ink-soft); max-width:60mm;">Institutional data compiled by KEMHRC, April 2025 – April 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — RESEARCH PORTFOLIO ============ -->
+<section class="page" data-kicker="01 · RESEARCH PORTFOLIO" data-page="02" data-icon="microscope">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 01</div>
+      <h2 class="section-title">Research portfolio</h2>
+      <p class="section-sub">The project list records 40 studies in 2023–24, 53 in 2024–25, and 46 in 2025–26, with ongoing work becoming the dominant status in the latest year.</p>
+    </div>
+    <div class="section-num"><span class="count" data-count="46">0</span></div>
+  </div>
+
+  <div class="legend-row" style="margin-bottom:10px;">
+    <span class="legend-dot"><i style="background:var(--teal)"></i>Ongoing</span>
+    <span class="legend-dot"><i style="background:var(--coral)"></i>Closed</span>
+    <span class="legend-dot"><i style="background:var(--amber)"></i>Discontinued / not started</span>
+    <span class="legend-dot"><i style="background:var(--ink-faint)"></i>Study withdrawn</span>
+  </div>
+  <div id="chart-portfolio"></div>
+
+  <div style="display:grid; grid-template-columns:1fr; gap:12px; margin-top:12px;">
+    <table class="data-table">
+      <thead><tr><th colspan="5">Financial year · April 2023 – March 2024</th></tr><tr><th>Type of studies</th><th class="num">Ongoing</th><th class="num">Closed</th><th class="num">Study withdrawn</th><th class="num">Grand total</th></tr></thead>
+      <tbody>
+        <tr><td>Clinical Study</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>Clinical trial</td><td class="num">2</td><td class="num">12</td><td class="num">0</td><td class="num">14</td></tr>
+        <tr><td>DNB</td><td class="num">2</td><td class="num">9</td><td class="num">0</td><td class="num">11</td></tr>
+        <tr><td>FCPS</td><td class="num">0</td><td class="num">3</td><td class="num">0</td><td class="num">3</td></tr>
+        <tr><td>Observational</td><td class="num">4</td><td class="num">6</td><td class="num">1</td><td class="num">11</td></tr>
+        <tr><td>PhD</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">1</td></tr>
+        <tr class="total-row"><td>Grand Total</td><td class="num">8</td><td class="num">31</td><td class="num">1</td><td class="num">40</td></tr>
+      </tbody>
+    </table>
+    <table class="data-table">
+      <thead><tr><th colspan="7">Financial year · April 2024 – March 2025</th></tr><tr><th>Type of studies</th><th class="num">Ongoing</th><th class="num">Closed</th><th class="num">Discontinue</th><th class="num">Not started</th><th class="num">Study withdrawn</th><th class="num">Grand total</th></tr></thead>
+      <tbody>
+        <tr><td>Case study</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
+        <tr><td>Clinical Study</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">6</td></tr>
+        <tr><td>Clinical trial</td><td class="num">5</td><td class="num">5</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">11</td></tr>
+        <tr><td>DNB</td><td class="num">5</td><td class="num">8</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">13</td></tr>
+        <tr><td>FCPS</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
+        <tr><td>Observational</td><td class="num">13</td><td class="num">6</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">20</td></tr>
+        <tr><td>PhD</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr>
+        <tr class="total-row"><td>Grand Total</td><td class="num">27</td><td class="num">24</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">53</td></tr>
+      </tbody>
+    </table>
+    <table class="data-table">
+      <thead><tr><th colspan="4">Financial year · April 2025 – March 2026</th></tr><tr><th>Type of studies</th><th class="num">Ongoing</th><th class="num">Closed</th><th class="num">Grand total</th></tr></thead>
+      <tbody>
+        <tr><td>Clinical Study</td><td class="num">1</td><td class="num">2</td><td class="num">3</td></tr>
+        <tr><td>Clinical trial</td><td class="num">9</td><td class="num">1</td><td class="num">10</td></tr>
+        <tr><td>DNB</td><td class="num">12</td><td class="num">0</td><td class="num">12</td></tr>
+        <tr><td>FCPS</td><td class="num">1</td><td class="num">0</td><td class="num">1</td></tr>
+        <tr><td>Observational</td><td class="num">12</td><td class="num">3</td><td class="num">15</td></tr>
+        <tr><td>PhD</td><td class="num">2</td><td class="num">0</td><td class="num">2</td></tr>
+        <tr><td>Socio behaviour study</td><td class="num">0</td><td class="num">1</td><td class="num">1</td></tr>
+        <tr class="total-row"><td>Grand Total</td><td class="num">37</td><td class="num">9</td><td class="num">46</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rflex" style="margin-top:16px; gap:14px;">
+    <div class="card"><div class="tag teal">Latest year</div><div class="card-title">37 ongoing studies</div><p class="body-text">Ongoing work rose from 8 in 2023–24 to 37 in 2025–26, while the latest portfolio recorded 46 studies overall.</p></div>
+    <div class="card"><div class="tag coral">Three-year view</div><div class="card-title">127 projects recorded</div><p class="body-text">The three annual grand totals sum to 127 project records across the reporting period.</p></div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC project list, financial years April 2023–March 2026</div>
+</section>
+
+<!-- ============ PAGE 3 — WORKFORCE & SCHOLARS ============ -->
+<section class="page" data-kicker="02 · WORKFORCE & SCHOLARS" data-page="03" data-icon="people">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 02</div>
+      <h2 class="section-title">Workforce &amp; scholars</h2>
+      <p class="section-sub">Staff strength grew across the three-year period to reach a high of 271 in 2025–26. Ph.D. scholars trained under Savitribai Phule Pune University continue to graduate at a steady pace.</p>
+    </div>
+    <div class="section-num"><span class="count" data-count="271">0</span></div>
+  </div>
+
+  <div class="rflex" style="gap:24px;">
+    <div>
+      <div class="legend-row" style="margin-bottom:6px;"><span class="legend-dot"><i style="background:var(--teal)"></i>Total staff, year-end</span></div>
+      <div id="chart-staff"></div>
+      <table class="data-table" style="margin-top:10px;">
+        <thead><tr><th>Staff category</th><th class="num">2023–24</th><th class="num">2024–25</th><th class="num">2025–26</th></tr></thead>
+        <tbody>
+          <tr><td>Scientists</td><td class="num">37</td><td class="num">28</td><td class="num">67</td></tr>
+          <tr><td>Technical</td><td class="num">171</td><td class="num">200</td><td class="num">170</td></tr>
+          <tr><td>Admin</td><td class="num">39</td><td class="num">33</td><td class="num">34</td></tr>
+          <tr><td>Total staff</td><td class="num">247</td><td class="num">261</td><td class="num">271</td></tr>
+        </tbody>
+      </table>
+      <p class="body-text" style="margin-top:10px;">Staff strength grew 5.7% in 2024–25 and a further 3.8% in 2025–26, reaching a net <b>+24 headcount</b> since 2023–24.</p>
+    </div>
+
+    <div>
+      <div class="legend-row" style="margin-bottom:6px;">
+        <span class="legend-dot"><i style="background:var(--teal)"></i>Ongoing</span>
+        <span class="legend-dot"><i style="background:var(--amber)"></i>Completed</span>
+      </div>
+      <div id="chart-phd" style="display:flex; justify-content:center;"></div>
+      <p class="body-text" style="text-align:center; margin-top:4px;">Ph.D. in Health Science, KEMHRC · under SPPU</p>
+    </div>
+  </div>
+
+  <div class="rflex" style="margin-top:30px; gap:14px;">
+    <div class="card">
+      <div class="tag teal">Talent pipeline</div>
+      <div class="card-title">9 scholars graduated this cycle</div>
+      <p class="body-text">More Ph.D. scholars have completed than remain ongoing — a sign the three-year SPPU program is now reliably producing graduates, not just enrolling them.</p>
+    </div>
+    <div class="card">
+      <div class="tag amber">Next page</div>
+      <div class="card-title">Training runs alongside research</div>
+      <p class="body-text">Beyond the Ph.D. track, KEMHRC runs two structured professional programs — see <b>Section 07, Capacity Building</b> — that trained 100+ students this cycle.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC staff records &amp; SPPU Ph.D. registry, 2023–2026</div>
+</section>
+
+<!-- ============ PAGE 4 — SCHOLARLY OUTPUT ============ -->
+<section class="page" data-kicker="03 · SCHOLARLY OUTPUT" data-page="04" data-icon="book">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 03</div>
+      <h2 class="section-title">Scholarly output</h2>
+      <p class="section-sub">Publication output rose 53.7% over three years, from 41 papers in 2023–24 to 63 in 2025–26, driven almost entirely by a surge in national-journal papers.</p>
+    </div>
+    <div class="section-num"><span class="count" data-count="63">0</span></div>
+  </div>
+
+  <div class="legend-row" style="margin-bottom:8px;">
+    <span class="legend-dot"><i style="background:var(--teal)"></i>International</span>
+    <span class="legend-dot"><i style="background:var(--amber)"></i>National</span>
+  </div>
+  <div id="chart-pubs"></div>
+
+  <table class="data-table" style="margin-top:14px;">
+    <thead><tr><th>Year</th><th class="num">Total papers</th><th class="num">International</th><th class="num">National</th></tr></thead>
+    <tbody>
+      <tr><td>2023–24</td><td class="num">41</td><td class="num">37</td><td class="num">04</td></tr>
+      <tr><td>2024–25</td><td class="num">43</td><td class="num">39</td><td class="num">04</td></tr>
+      <tr><td>2025–26</td><td class="num">63</td><td class="num">41</td><td class="num">22</td></tr>
+    </tbody>
+  </table>
+
+  <div class="rflex" style="margin-top:24px; gap:14px;">
+    <div class="card">
+      <div class="callout-num" style="font-size:26px;">41 <span style="font-size:12px; color:var(--ink-soft); font-weight:500;">→ 39 → 41</span></div>
+      <p class="body-text" style="margin-top:6px;">International papers held essentially flat across the three years — a stable base of global-facing output.</p>
+    </div>
+    <div class="card">
+      <div class="callout-num" style="font-size:26px; color:var(--coral);">22</div>
+      <p class="body-text" style="margin-top:6px;">National papers in 2025–26 alone — <b>5.5× the prior year's count of 4</b> — the single biggest driver of overall growth.</p>
+    </div>
+    <div class="card">
+      <div class="callout-num" style="font-size:26px;">65% / 35%</div>
+      <p class="body-text" style="margin-top:6px;">International-to-national split in 2025–26, down from a 90/10 split two years earlier as national output diversified.</p>
+    </div>
+  </div>
+
+  <div class="rflex" style="margin-top:16px; gap:14px;">
+    <div class="card">
+      <div class="tag amber">What changed</div>
+      <div class="card-title" style="font-size:13px;">National output diversified</div>
+      <p class="body-text">The jump to 22 national papers suggests broader participation beyond the institute's core international-trial output — more staff and trainees publishing domestically.</p>
+    </div>
+    <div class="card">
+      <div class="tag teal">Steady base</div>
+      <div class="card-title" style="font-size:13px;">International pipeline unchanged</div>
+      <p class="body-text">International publications moved within a narrow 37–41 band for three straight years — this growth did not come at their expense.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC publication register, 2023–2026</div>
+</section>
+
+<!-- ============ PAGE 5 — COLLABORATOR NETWORK ============ -->
+<section class="page" data-kicker="04 · COLLABORATOR NETWORK" data-page="05" data-icon="network">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 04</div>
+      <h2 class="section-title">Collaborator network</h2>
+      <p class="section-sub">Pharmaceutical partners are, and have consistently been, KEMHRC's largest collaborator category — peaking in 2024–25 before easing back.</p>
+    </div>
+    <div class="section-num"><span class="count" data-count="54">0</span></div>
+  </div>
+
+  <div style="display:flex; gap:18px; margin-bottom:18px;">
+    <div class="vitals" style="flex:1;">
+      <div class="vital"><div class="v-num">41</div><div class="v-label">Total collaborators, 2023–24</div></div>
+      <div class="vital"><div class="v-num">62 <span class="v-trend">↑ 51%</span></div><div class="v-label">Total collaborators, 2024–25</div></div>
+      <div class="vital"><div class="v-num"><span class="count" data-count="54">0</span> <span class="v-trend">↑ 13%</span></div><div class="v-label">Total collaborators, 2025–26</div></div>
+    </div>
+  </div>
+
+  <div class="legend-row" style="margin-bottom:8px;">
+    <span class="legend-dot"><i style="background:#9BB8B6"></i>2023–24</span>
+    <span class="legend-dot"><i style="background:var(--teal)"></i>2024–25</span>
+    <span class="legend-dot"><i style="background:var(--teal-deep)"></i>2025–26</span>
+  </div>
+  <div id="chart-collab"></div>
+
+  <div style="margin-top:16px; overflow-x:auto;">
+    <table class="data-table" style="min-width:150mm;">
+      <thead>
+        <tr><th>Year / status</th><th class="num">Government</th><th class="num">Pharmaceutical</th><th class="num">Research Institute</th><th class="num">CSR</th><th class="num">Foundation</th><th class="num">NGO</th><th class="num">Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2023–24 · International</td><td class="num">5</td><td class="num">5</td><td class="num">3</td><td class="num">0</td><td class="num">2</td><td class="num">—</td><td class="num">15</td></tr>
+        <tr><td>2023–24 · National</td><td class="num">6</td><td class="num">11</td><td class="num">5</td><td class="num">1</td><td class="num">3</td><td class="num">—</td><td class="num">26</td></tr>
+        <tr class="total-row"><td>2023–24 · Total</td><td class="num">11</td><td class="num">16</td><td class="num">8</td><td class="num">1</td><td class="num">5</td><td class="num">—</td><td class="num">41</td></tr>
+        <tr class="year-start"><td>2024–25 · International</td><td class="num">7</td><td class="num">6</td><td class="num">5</td><td class="num">0</td><td class="num">2</td><td class="num">0</td><td class="num">20</td></tr>
+        <tr><td>2024–25 · National</td><td class="num">6</td><td class="num">23</td><td class="num">6</td><td class="num">2</td><td class="num">4</td><td class="num">1</td><td class="num">42</td></tr>
+        <tr class="total-row"><td>2024–25 · Total</td><td class="num">13</td><td class="num">29</td><td class="num">11</td><td class="num">2</td><td class="num">6</td><td class="num">1</td><td class="num">62</td></tr>
+        <tr class="year-start"><td>2025–26 · International</td><td class="num">6</td><td class="num">8</td><td class="num">4</td><td class="num">0</td><td class="num">1</td><td class="num">—</td><td class="num">19</td></tr>
+        <tr><td>2025–26 · National</td><td class="num">5</td><td class="num">19</td><td class="num">5</td><td class="num">2</td><td class="num">4</td><td class="num">—</td><td class="num">35</td></tr>
+        <tr class="total-row"><td>2025–26 · Total</td><td class="num">11</td><td class="num">27</td><td class="num">9</td><td class="num">2</td><td class="num">5</td><td class="num">—</td><td class="num">54</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:22px; border-top:1px solid var(--line); padding-top:16px;">
+    <div class="eyebrow">List of Top 10 collaborators</div>
+    <div class="rflex" style="gap:24px; margin-top:8px;">
+      <div style="font-size:11px; color:var(--ink); line-height:2.1;">
+        <div class="eyebrow" style="margin-bottom:4px;">Foreign</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">01</span>National Institutes of Health (NIH), USA</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">02</span>Bill &amp; Melinda Gates Foundation, US</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">03</span>Canadian Institutes of Health Research (CIHR), Canada</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">04</span>Swedish Research Council, Sweden</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">05</span>Fogarty International Centre, USA</div>
+      </div>
+      <div style="font-size:11px; color:var(--ink); line-height:2.1;">
+        <div class="eyebrow" style="margin-bottom:4px;">Indian</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">01</span>Serum Institute of India Private Ltd, Pune</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">02</span>Indian Council of Medical Research (ICMR), New Delhi</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">03</span>Bharat Biotech International Ltd., Hyderabad</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">04</span>Department of Biotechnology (DBT), New Delhi</div>
+        <div><span style="font-family:var(--mono); color:var(--ink-faint); margin-right:6px;">05</span>Wellcome India Alliance, New Delhi</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rflex" style="margin-top:20px; gap:14px;">
+    <div class="card">
+      <div class="tag teal">Largest category</div>
+      <div class="card-title" style="font-size:13px;">Pharmaceutical partners</div>
+      <p class="body-text">27–29 pharmaceutical collaborators each of the last two years — roughly half of all active collaborators, and the category driving most of the 2024–25 spike.</p>
+    </div>
+    <div class="card">
+      <div class="tag coral">Smallest category</div>
+      <div class="card-title" style="font-size:13px;">CSR collaborators</div>
+      <p class="body-text">CSR collaborations remained in the low single digits across the reporting period, while pharmaceutical and government partnerships formed the largest parts of the network.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC collaborator register, 2023–2026 · Categories: Government, Pharmaceutical, Research Institute, CSR, Foundation, NGO</div>
+</section>
+
+<!-- ============ PAGE 6 — CSR PARTNERS ============ -->
+<section class="page" data-kicker="05 · CSR PARTNERS" data-page="06" data-icon="heart">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 05</div>
+      <h2 class="section-title">CSR partners</h2>
+      <p class="section-sub">Eleven corporate, foundation and philanthropic partners backed KEMHRC's community health and research programs this year.</p>
+    </div>
+    <div class="section-num"><span class="count" data-count="11">0</span></div>
+  </div>
+
+  <div class="rflex" style="gap:12px; flex-wrap:wrap;">
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Bajaj_finserv.jpg" alt="Bajaj FinServ CSR logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Bajaj FinServ CSR</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/HSBC_Skill_for_life.png" alt="HSBC Skills for Life logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">HSBC Skills for Life</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Chemital_Industries_CSR.webp" alt="Chemital Industries CSR logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Chemital Industries CSR</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Rotary_Club_of_Poona_Downtown.jpg" alt="Rotary Club of Poona Downtown logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Rotary Club of Poona Downtown</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Mukul%20MadhavFoundation.png" alt="Mukul Madhav Foundation logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Mukul Madhav Foundation</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Hinduja_Foundation.svg" alt="Hinduja Foundation logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Hinduja Foundation</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Infosy-foundation_Logo_Blue.webp" alt="Infosys Foundation logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Infosys Foundation</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Bayer_House_Central_Avenue.png" alt="Bayer House Central Avenue logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Bayer House Central Avenue</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Arpan_NGO_Mumbai.jpg" alt="Arpan NGO Mumbai logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Arpan NGO Mumbai</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/Tata_Elxsi.png" alt="Tata Elxsi Limited logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Tata Elxsi Limited</div></div>
+    <div class="card" style="text-align:center; padding:14px 10px; flex:0 0 30%;"><img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Logos/gits_food_products_pvtltd_logo.jpg" alt="Gits Food Products Pvt. Ltd. logo" style="display:block; width:100%; height:56px; object-fit:contain; margin-bottom:9px;"><div class="card-title" style="font-size:13px;">Gits Food Products Pvt. Ltd.</div></div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC CSR &amp; institutional registration records, FY2025–26</div>
+</section>
+
+<!-- ============ PAGE 7 — HONOURS & RESEARCH OUTPUTS ============ -->
+<section class="page" data-kicker="06 · HONOURS & RESEARCH OUTPUTS" data-page="07" data-icon="award">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 06</div>
+      <h2 class="section-title">Honours &amp; research outputs</h2>
+      <p class="section-sub">19 individual recognitions landed across 8 researchers this year, alongside one granted patent and two published works.</p>
+    </div>
+    <div class="section-num"><span class="count" data-count="19">0</span></div>
+  </div>
+
+  <div class="legend-row" style="margin-bottom:6px;"><span class="legend-dot"><i style="background:var(--amber)"></i>Recognitions received</span></div>
+  <div id="chart-honours"></div>
+
+  <div class="rflex" style="margin-top:22px; gap:14px;">
+    <div class="card">
+      <div class="tag coral">Patent granted</div>
+      <div class="card-title">AI-based inflammatory arthritis detection</div>
+      <p class="body-text">Dr. Sanat Phatak was granted an Indian patent for a system that uses artificial intelligence to detect inflammatory arthritis in joint areas.</p>
+    </div>
+    <div class="card">
+      <div class="tag teal">Book chapter</div>
+      <div class="card-title">Type 2 diabetes: A modern-day Avatar of Malnutrition-Related Diabetes</div>
+      <p class="body-text">C.S. Yajnik and Sayali Deshpande-Joshi contributed Chapter 6 to <i>Cardiometabolic Diseases: Molecular Basis, Early Detection of Risks, and Management</i>, edited by Gundu H.R. Rao and Undurti N. Das.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; margin-top:10px; font-family:var(--mono); font-size:8.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;">
+        <div><b style="color:var(--ink);">Publisher</b><br>Academic Press · 2025</div>
+        <div><b style="color:var(--ink);">Chapter</b><br>6 · Pages 65–76</div>
+        <div style="grid-column:1 / -1;"><b style="color:var(--ink);">ISBN</b><br>9780323954693</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;" class="card">
+    <div class="tag amber">Community booklet</div>
+    <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Forging_Ahead_With_Our_families.png" alt="Forging Ahead With Our Families booklet cover" style="display:block; width:150px; max-width:100%; height:auto; margin-bottom:12px; border:1px solid var(--line);">
+    <div class="card-title">"Forging Ahead With Our Families"</div>
+    <p class="body-text">Published for International Women's Day 2025, this booklet by VRHP and CHRU teams (with Basic Health Services, Udaipur) documents five frontline women health workers from rural Maharashtra and Rajasthan, and how their families supported their careers.</p>
+  </div>
+
+  <div class="rflex" style="margin-top:14px; gap:14px;">
+    <div class="card">
+      <div class="tag teal">Program recognition</div>
+      <div class="card-title" style="font-size:13px;">VRHP rated top-5 CCOE</div>
+      <p class="body-text">KEMHRC's Vadu Rural Health Program was rated among the most engaging Community-based Centres of Excellence — top 5 of 30 — at the CCOE conclave, Delhi, January 2025.</p>
+    </div>
+    <div class="card">
+      <div class="tag teal">New facility</div>
+      <div class="card-title" style="font-size:13px;">CHRU new office inaugurated</div>
+      <p class="body-text">The Community Health Research Unit opened a new office in October 2025, expanding capacity in Manchar.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC honours, patents &amp; publications register, FY2025–26</div>
+</section>
+
+<!-- ============ PAGE 8 — CAPACITY BUILDING ============ -->
+<section class="page" data-kicker="07 · CAPACITY BUILDING" data-page="08" data-icon="gradcap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 07</div>
+      <h2 class="section-title">Capacity building</h2>
+      <p class="section-sub">KEMHRC trains the next generation of clinical research professionals through two structured programs, run in parallel with day-to-day research work.</p>
+    </div>
+    <div class="section-num">100+</div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <div class="card-title">Academic Internship Program</div>
+      <div class="tag teal" style="margin:0;">Since December 2021 · 3 months</div>
+    </div>
+    <p class="body-text" style="margin-top:4px; margin-bottom:12px;">Gives science graduates hands-on exposure to clinical research processes, documentation, methodology and Good Clinical Practice.</p>
+    <div id="chart-batches"></div>
+    <div style="display:flex; gap:22px; margin-top:10px;">
+      <div><span class="callout-num" style="font-size:20px;">16</span><span style="font-size:9px; color:var(--ink-soft); text-transform:uppercase; margin-left:4px;">Batches completed</span></div>
+      <div><span class="callout-num" style="font-size:20px; color:var(--coral);">17th</span><span style="font-size:9px; color:var(--ink-soft); text-transform:uppercase; margin-left:4px;">Batch in progress</span></div>
+      <div><span class="callout-num" style="font-size:20px;">100+</span><span style="font-size:9px; color:var(--ink-soft); text-transform:uppercase; margin-left:4px;">Students trained to date</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px;">
+      <div class="card-title">Post Graduate Diploma in Clinical Research (PGDCR)</div>
+      <div class="tag amber" style="margin:0;">Since August 2024 · 6 months</div>
+    </div>
+    <p class="body-text" style="margin-top:4px; margin-bottom:12px;">A structured diploma in trial methodology, drug development, GCP, ethics, regulatory affairs, data management, pharmacovigilance and medical writing.</p>
+    <div id="chart-pgdcr"></div>
+    <div style="display:flex; gap:22px; margin-top:10px;">
+      <div><span class="callout-num" style="font-size:20px;">4</span><span style="font-size:9px; color:var(--ink-soft); text-transform:uppercase; margin-left:4px;">Batches completed</span></div>
+      <div><span class="callout-num" style="font-size:20px; color:var(--coral);">5th</span><span style="font-size:9px; color:var(--ink-soft); text-transform:uppercase; margin-left:4px;">Batch ongoing</span></div>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC Academic Internship &amp; PGDCR program records, as of April 2026</div>
+</section>
+
+<!-- ============ PAGE 9 — FEATURED STUDIES ============ -->
+<section class="page" data-kicker="08 · FEATURED STUDIES" data-page="09" data-icon="flask">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 08</div>
+      <h2 class="section-title">Featured studies</h2>
+      <p class="section-sub">Two studies in detail — a capacity-building research platform, and a Phase IV vaccine trial pending ethics approval.</p>
+    </div>
+    <div class="section-num">02</div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="tag teal">Study synopsis</div>
+    <div class="card-title">PRERNA 3.0 — Platform for Research Excellence Related to National Aims</div>
+    <p class="body-text" style="margin-bottom:10px;">A collaborative research platform to nurture early-career researchers and accelerate high-quality, interdisciplinary public health research in maternal and child health, aligned to national and global priorities.</p>
+    <div class="rflex" style="gap:10px;">
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;">
+        <div class="callout-num" style="font-size:20px;">30+</div>
+        <div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Researchers trained</div>
+      </div>
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;">
+        <div class="callout-num" style="font-size:20px;">15+</div>
+        <div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Reviews &amp; meta-analyses</div>
+      </div>
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;">
+        <div class="callout-num" style="font-size:20px;">3</div>
+        <div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Multi-site proposals</div>
+      </div>
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;">
+        <div class="callout-num" style="font-size:20px;">↑</div>
+        <div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Institutional capacity</div>
+      </div>
+    </div>
+    <div style="font-size:8.5px; color:var(--ink-faint); margin-top:6px; text-transform:uppercase; font-family:var(--mono);">Expected outcomes, per study protocol</div>
+  </div>
+
+  <div class="card">
+    <div class="tag coral">Phase IV · Pending ethics approval &amp; CTRI registration</div>
+    <div class="card-title">Neonatal Rotavirus Vaccination Study</div>
+    <p class="body-text" style="margin-bottom:10px;">An open-label, randomized, controlled trial testing whether a <b>birth-dose</b> schedule of oral rotavirus vaccine protects as well as the standard WHO infant schedule — across all four WHO-prequalified vaccines, in 1,200 neonates from the CHRU catchment area, Pune.</p>
+
+    <div style="font-family:var(--mono); font-size:8.5px; color:var(--ink-soft); text-transform:uppercase; margin-bottom:6px;">Study design — 8 randomized arms</div>
+    <div id="chart-armgrid"></div>
+
+    <div class="rflex" style="gap:14px; margin-top:12px;">
+      <div>
+        <div style="font-size:9px; font-weight:700; text-transform:uppercase; color:var(--ink-soft); margin-bottom:3px;">Primary outcome</div>
+        <p class="body-text">Proportion of infants seroresponding (IgA ≥20 U/mL) 4 weeks after final dose.</p>
+      </div>
+      <div>
+        <div style="font-size:9px; font-weight:700; text-transform:uppercase; color:var(--ink-soft); margin-bottom:3px;">Secondary outcomes</div>
+        <p class="body-text">Antibody levels (GMC), viral shedding, maternal-antibody influence, safety (AEs/SAEs).</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px; font-size:9px; color:var(--ink-faint); font-family:var(--mono);">
+    FY2025–26 VISITORS INCLUDED TEAMS FROM ICMR, RMRC DIBRUGARH, D.Y. PATIL UNIVERSITY, MAHAN TRUST MELGHAT, RESPIRE (UPM / UM / UK), STATE HEALTH SYSTEM RESOURCE CENTRE, AND UNIVERSITY OF SRI JAYEWARDENEPURA, SRI LANKA.
+  </div>
+
+  <div class="foot-note">Source: KEMHRC study protocols &amp; visitor log, FY2025–26 · End of report</div>
+</section>
+
+<!-- ============ PAGE 10 — KEY PROJECTS ============ -->
+<section class="page" data-kicker="09 · KEY PROJECTS" data-page="10" data-icon="projects">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 09</div>
+      <h2 class="section-title">Key Projects</h2>
+      <p class="section-sub">Collaborative research, vaccine evaluation, and community engagement projects advancing maternal and child health across research and implementation settings.</p>
+    </div>
+    <div class="section-num">03</div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px;">
+    <div class="tag teal">Collaborative research platform</div>
+    <div class="card-title">PRERNA 3.0 — Platform for Research Excellence Related to National Aims</div>
+    <p class="body-text">PRERNA 3.0 aims to establish a collaborative research platform to nurture early-career researchers and accelerate high-quality, interdisciplinary public health research in maternal and child health.</p>
+    <div style="margin-top:10px;">
+      <div style="font-size:9px; font-weight:700; text-transform:uppercase; color:var(--ink-soft); margin-bottom:4px;">Objectives</div>
+      <p class="body-text">Build researcher capacity through mentorship and structured training; identify priority research questions via evidence synthesis and secondary data analysis; and develop multicentric research proposals for India's maternal and child health priorities.</p>
+    </div>
+    <div class="rflex" style="gap:10px; margin-top:12px;">
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;"><div class="callout-num" style="font-size:20px;">30+</div><div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Early-career researchers trained</div></div>
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;"><div class="callout-num" style="font-size:20px;">15</div><div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Systematic reviews aligned with policy</div></div>
+      <div style="text-align:center; padding:8px; background:var(--teal-light); border-radius:3px;"><div class="callout-num" style="font-size:20px;">3</div><div style="font-size:8.5px; color:var(--ink-soft); text-transform:uppercase;">Multi-site proposals submitted</div></div>
+    </div>
+    <div style="font-size:8.5px; color:var(--ink-faint); margin-top:6px; text-transform:uppercase; font-family:var(--mono);">Expected outcomes · strengthened institutional research capacity</div>
+  </div>
+
+  <div class="rflex" style="gap:14px; align-items:stretch;">
+    <div class="card">
+      <div class="tag coral">Phase IV vaccine trial</div>
+      <div class="card-title">Neonatal Rotavirus Vaccination Study</div>
+      <p class="body-text">KEMHRC, Pune, is conducting a Phase IV trial to evaluate whether a birth dose of oral rotavirus vaccine is as effective and safe as the standard WHO schedule.</p>
+      <p class="body-text" style="margin-top:8px;">The study compares immune responses across <b>8 groups</b> (4 vaccines × 2 schedules) in <b>1,200 neonates</b>. Findings will help shape India's rotavirus vaccination policy.</p>
+    </div>
+    <div class="card">
+      <div class="tag amber">Community engagement</div>
+      <div class="card-title">Infosys Foundation's Community Engagement Model for Maternal and Child Health</div>
+      <p class="body-text">The KEMHRC project targets maternal and child health in <b>64 tribal villages of Maharashtra</b>, using Arogya Kutis, SNEH centers, mobile clinics, and trained community health workers to overcome access barriers.</p>
+      <p class="body-text" style="margin-top:8px;">It aims to raise MCH awareness by <b>70%</b> and improve quality of life by <b>50%</b>, while building local capacity and income generation for sustainability through culturally sensitive, community-driven primary healthcare.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC key projects brief, FY2025–26</div>
+</section>
+
+<!-- ============ PAGE 11 — OUTREACH ============ -->
+<section class="page" data-kicker="10 · OUTREACH" data-page="11" data-icon="outreach">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 10</div>
+      <h2 class="section-title">Outreach</h2>
+      <p class="section-sub">Community health, clinical support, scientific exchange, and institutional review beyond the research portfolio.</p>
+    </div>
+    <div class="section-num">04</div>
+  </div>
+
+  <div class="rflex" style="display:flex; flex-direction:column; gap:14px; margin-bottom:14px;">
+    <div class="card">
+      <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Outreach_Picture1.png" alt="Cleft lip and palate care outreach" style="display:block; width:100%; height:220px; object-fit:cover; margin-bottom:10px; border:1px solid var(--line);">
+      <div class="tag teal">Impact</div>
+      <div class="card-title">Cleft lip and palate care</div>
+      <p class="body-text">Children from Nandurbar, Dhule, and Pune districts with cleft lip and palate received free counseling and surgical treatment at KEM Hospital through KEMHRC. The program focuses on early detection and support so every child can receive the care they need at no cost.</p>
+    </div>
+    <div class="card">
+      <div style="display:flex; gap:6px; margin-bottom:10px;">
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Outreach_Picture2.png" alt="Type 1 diabetes outreach" style="display:block; width:50%; height:220px; object-fit:cover; border:1px solid var(--line);">
+        <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Outreach_Picture3.png" alt="Type 1 diabetes outreach" style="display:block; width:50%; height:220px; object-fit:cover; border:1px solid var(--line);">
+      </div>
+      <div class="tag coral">Diabetes</div>
+      <div class="card-title">Supporting children with Type 1 diabetes</div>
+      <p class="body-text">Type 1 diabetes is an autoimmune condition that destroys insulin-producing cells and requires lifelong daily insulin injections, particularly in children and adolescents. With insulin therapy, monitoring, and lifestyle management, patients can live healthy lives, but limited access to insulin and healthcare can lead to severe complications and early death.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC outreach brief, FY2025–26 · Page 1 of 2</div>
+</section>
+
+<!-- ============ PAGE 12 — OUTREACH CONTINUED ============ -->
+<section class="page" data-kicker="10 · OUTREACH CONTINUED" data-page="12" data-icon="outreach">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Section 10 · Continued</div>
+      <h2 class="section-title">Outreach</h2>
+      <p class="section-sub">Scientific exchange and institutional review supporting KEMHRC's research direction and public engagement.</p>
+    </div>
+    <div class="section-num">04</div>
+  </div>
+
+  <div class="rflex" style="display:flex; flex-direction:column; gap:14px;">
+    <div class="card">
+      <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Outreach_Picture4.png.jpg" alt="9th Banoo Coyaji Oration" style="display:block; width:100%; height:220px; object-fit:cover; margin-bottom:10px; border:1px solid var(--line);">
+      <div class="tag amber">Oration</div>
+      <div class="card-title">9th Banoo Coyaji Oration</div>
+      <p class="body-text">Dr. Soumya Swaminathan, Indian paediatrician and clinical scientist, was the invited speaker for the 9th Banoo Coyaji Oration, scheduled on Saturday, 23 May 2026.</p>
+    </div>
+    <div class="card">
+      <img src="DATA%20ANNUAL%20REPORT/RAJIV%20DATA%20ANNUAL%20REPORT/Outreach_Picture6.png.jpg" alt="KEMHRC Scientific Advisory Committee meeting" style="display:block; width:100%; height:220px; object-fit:cover; margin-bottom:10px; border:1px solid var(--line);">
+      <div class="tag teal">Scientific Advisory Committee</div>
+      <div class="card-title">SAC meeting 2025</div>
+      <p class="body-text">The KEMHRC SAC 2025 was held on 22–23 December 2025 in the KEMHRC auditorium. SAC members, faculty, researchers, Ph.D. scholars, students, and collaborators reviewed ongoing research, discussed institutional progress, and charted future strategic directions.</p>
+    </div>
+  </div>
+
+  <div class="foot-note">Source: KEMHRC outreach brief, FY2025–26 · Page 2 of 2 · Five image assets available in supplied report folder</div>
+</section>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent){
+  const e = document.createElementNS(NS, tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function fmt(n){ return n.toLocaleString('en-IN'); }
+
+/* ---------- Horizontal stacked bar (Research portfolio) ---------- */
+function hStackedBar(containerId, items, maxVal){
+  const w = 560, rowH = 30, gap = 8, labelW = 100, chartW = w - labelW - 40;
+  const h = items.length * (rowH + gap) + 10;
+  const svg = el('svg', {viewBox:`0 0 ${w} ${h}`, width:'100%', height: h*0.72});
+  items.forEach((it, i) => {
+    const y = i * (rowH + gap) + 6;
+    el('text', {x:0, y:y+rowH/2+4, 'font-family':'var(--sans)', 'font-size':10.5, fill:'var(--ink)'}, svg).textContent = it.label;
+    let x = labelW;
+    it.segs.forEach(seg => {
+      const segW = (seg.value / maxVal) * chartW;
+      if(segW > 0){
+        el('rect', {x, y, width:segW, height:rowH, fill:seg.color, rx:2, class:'bar-seg', style:`transition-delay:${i*60}ms`}, svg);
+        if(segW > 16){
+          const t = el('text', {x:x+segW/2, y:y+rowH/2+4, 'text-anchor':'middle', 'font-family':'var(--mono)', 'font-size':10, fill:'#fff', 'font-weight':600}, svg);
+          t.textContent = seg.value;
+        }
+      }
+      x += segW;
+    });
+    const t2 = el('text', {x:x+8, y:y+rowH/2+4, 'font-family':'var(--mono)', 'font-size':11, fill:'var(--ink)', 'font-weight':700}, svg);
+    t2.textContent = it.total;
+  });
+  document.getElementById(containerId).appendChild(svg);
+}
+
+/* ---------- Vertical grouped/stacked bar ---------- */
+function vBarChart(containerId, {labels, series, maxVal, stacked=false, height=190, showTotal=false}){
+  const w = 560, h = height, padB = 26, padT = 18, chartH = h - padB - padT;
+  const groupW = (w - 20) / labels.length;
+  const barGap = stacked ? 0 : 6;
+  const barW = stacked ? groupW*0.42 : (groupW*0.62 - barGap*(series.length-1))/series.length;
+  const svg = el('svg', {viewBox:`0 0 ${w} ${h}`, width:'100%', height: h*0.85});
+  // gridline baseline
+  el('line', {x1:10, y1:h-padB, x2:w-10, y2:h-padB, stroke:'var(--line-strong)', 'stroke-width':1}, svg);
+
+  labels.forEach((lab, gi) => {
+    const gx = 10 + gi*groupW + groupW/2;
+    if(stacked){
+      let yCursor = h - padB;
+      let total = 0;
+      series.forEach(s => total += s.values[gi]);
+      series.forEach(s => {
+        const val = s.values[gi];
+        const segH = (val/maxVal)*chartH;
+        yCursor -= segH;
+        el('rect', {x:gx-barW/2, y:yCursor, width:barW, height:segH, fill:s.color, rx:2, class:'bar-vert'}, svg);
+        if(segH > 12){
+          const t = el('text', {x:gx, y:yCursor+segH/2+4, 'text-anchor':'middle', 'font-family':'var(--mono)', 'font-size':9.5, fill:'#fff', 'font-weight':600}, svg);
+          t.textContent = val;
+        }
+      });
+      const tt = el('text', {x:gx, y:yCursor-8, 'text-anchor':'middle', 'font-family':'var(--mono)', 'font-size':11, fill:'var(--ink)', 'font-weight':700}, svg);
+      tt.textContent = total;
+    } else {
+      const totalBarW = barW*series.length + barGap*(series.length-1);
+      let bx = gx - totalBarW/2;
+      series.forEach(s => {
+        const val = s.values[gi];
+        const barH = (val/maxVal)*chartH;
+        const y = h - padB - barH;
+        el('rect', {x:bx, y, width:barW, height:barH, fill:s.color, rx:2, class:'bar-vert'}, svg);
+        const t = el('text', {x:bx+barW/2, y:y-5, 'text-anchor':'middle', 'font-family':'var(--mono)', 'font-size':9.5, fill:'var(--ink)', 'font-weight':700}, svg);
+        t.textContent = val;
+        bx += barW + barGap;
+      });
+    }
+    const lt = el('text', {x:gx, y:h-8, 'text-anchor':'middle', 'font-family':'var(--sans)', 'font-size':9.5, fill:'var(--ink-soft)'}, svg);
+    lt.textContent = lab;
+  });
+  document.getElementById(containerId).appendChild(svg);
+}
+
+/* ---------- Donut ---------- */
+function donutChart(containerId, segments, centerNum, centerLabel){
+  const size = 210, cx = size/2, cy = size/2, r = 72, sw = 26;
+  const total = segments.reduce((a,s)=>a+s.value,0);
+  const svg = el('svg', {viewBox:`0 0 ${size} ${size+34}`, width:220, height:220+34});
+  const circumference = 2*Math.PI*r;
+  let offset = 0;
+  segments.forEach(s => {
+    const frac = s.value/total;
+    const dash = frac*circumference;
+    const c = el('circle', {
+      cx, cy, r, fill:'none', stroke:s.color, 'stroke-width':sw,
+      'stroke-dasharray': `${dash} ${circumference-dash}`,
+      'stroke-dashoffset': -offset,
+      transform:`rotate(-90 ${cx} ${cy})`
+    }, svg);
+    offset += dash;
+  });
+  el('text', {x:cx, y:cy-2, 'text-anchor':'middle', 'font-family':'var(--mono)', 'font-size':30, 'font-weight':700, fill:'var(--ink)'}, svg).textContent = centerNum;
+  el('text', {x:cx, y:cy+16, 'text-anchor':'middle', 'font-family':'var(--sans)', 'font-size':9, fill:'var(--ink-soft)'}, svg).textContent = centerLabel;
+  // segment labels below
+  segments.forEach((s,i) => {
+    const y = size + 10 + i*13;
+    el('circle', {cx:20, cy:y-4, r:4, fill:s.color}, svg);
+    el('text', {x:30, y:y, 'font-family':'var(--sans)', 'font-size':10, fill:'var(--ink)'}, svg).textContent = `${s.label} — ${s.value}`;
+  });
+  document.getElementById(containerId).appendChild(svg);
+}
+
+/* ---------- Dot progress row ---------- */
+function dotRow(containerId, filled, active, total, colorFilled, colorActive){
+  const r = 8, gap = 6, w = total*(r*2+gap), h = 24;
+  const svg = el('svg', {viewBox:`0 0 ${w} ${h}`, width:Math.min(w,520), height:h});
+  for(let i=0;i<total;i++){
+    const cx = r + i*(r*2+gap);
+    let fill = 'var(--line-strong)';
+    if(i < filled) fill = colorFilled;
+    else if(i === filled && active) fill = colorActive;
+    el('circle', {cx, cy:h/2, r, fill, class:'dot-anim', style:`transition-delay:${i*35}ms`}, svg);
+  }
+  document.getElementById(containerId).appendChild(svg);
+}
+
+/* ---------- Vaccine arm grid ---------- */
+function armGrid(containerId){
+  const vaccines = ['Rotavac','Rotasiil','RotaTeq','Rotarix'];
+  const schedules = [{name:'Neonatal (birth dose + WHO)', color:'var(--teal)'}, {name:'Standard WHO infant schedule', color:'var(--amber)'}];
+  const cellW = 130, cellH = 44, gap=8, labelW=0, headH=20;
+  const w = cellW*4 + gap*3, h = headH + cellH*2 + gap;
+  const svg = el('svg', {viewBox:`0 0 ${w} ${h+18}`, width:'100%', height:(h+18)*0.9});
+  vaccines.forEach((v,i)=>{
+    el('text', {x:i*(cellW+gap)+cellW/2, y:12, 'text-anchor':'middle','font-family':'var(--mono)','font-size':9,'font-weight':600, fill:'var(--ink-soft)'}, svg).textContent=v;
+  });
+  schedules.forEach((s,ri)=>{
+    vaccines.forEach((v,ci)=>{
+      const x = ci*(cellW+gap), y = headH + ri*(cellH+gap);
+      el('rect', {x, y, width:cellW, height:cellH, fill:s.color, opacity:0.14, stroke:s.color, 'stroke-width':1.2, rx:3}, svg);
+      const t = el('text', {x:x+cellW/2, y:y+cellH/2+4, 'text-anchor':'middle','font-family':'var(--sans)','font-size':9, fill:'var(--ink)'}, svg);
+      t.textContent = `Arm ${ri*4+ci+1}`;
+    });
+    el('text', {x:w+6, y:headH+ri*(cellH+gap)+cellH/2, 'font-family':'var(--sans)', 'font-size':0}, svg);
+  });
+  document.getElementById(containerId).appendChild(svg);
+  // schedule legend
+  const legend = document.createElement('div');
+  legend.style.cssText = 'display:flex; gap:16px; margin-top:6px;';
+  schedules.forEach(s=>{
+    const item = document.createElement('span');
+    item.className='legend-dot';
+    item.innerHTML = `<i style="background:${s.color.replace('var(--teal)','#0E6E6A').replace('var(--amber)','#BD8A1F')}"></i>${s.name}`;
+    legend.appendChild(item);
+  });
+  document.getElementById(containerId).parentElement.insertBefore(legend, document.getElementById(containerId).nextSibling);
+}
+
+/* ================= INSTANTIATE ================= */
+vBarChart('chart-portfolio', {
+  labels:['2023–24','2024–25','2025–26'],
+  series:[
+    {name:'Ongoing', color:'var(--teal)', values:[8,27,37]},
+    {name:'Closed', color:'var(--coral)', values:[31,24,9]},
+    {name:'Discontinued / not started', color:'var(--amber)', values:[0,2,0]},
+    {name:'Study withdrawn', color:'var(--ink-faint)', values:[1,0,0]}
+  ],
+  maxVal:40, height:210
+});
+
+vBarChart('chart-staff', {
+  labels:['2023–24','2024–25','2025–26'],
+  series:[{name:'Staff', color:'var(--teal)', values:[247,261,271]}],
+  maxVal:300, height:190
+});
+
+donutChart('chart-phd', [
+  {label:'Ongoing', value:8, color:'var(--teal)'},
+  {label:'Completed', value:9, color:'var(--amber)'}
+], 17, 'PhD scholars');
+
+vBarChart('chart-pubs', {
+  labels:['2023–24','2024–25','2025–26'],
+  series:[
+    {name:'International', color:'var(--teal)', values:[37,39,41]},
+    {name:'National', color:'var(--amber)', values:[4,4,22]}
+  ],
+  maxVal:68, height:210, stacked:true
+});
+
+vBarChart('chart-collab', {
+  labels:['Government','Pharmaceutical','Research Institute','CSR','Foundation','NGO'],
+  series:[
+    {name:'2023–24', color:'#9BB8B6', values:[11,16,8,1,5,0]},
+    {name:'2024–25', color:'var(--teal)', values:[13,29,11,2,6,1]},
+    {name:'2025–26', color:'var(--teal-deep)', values:[11,27,9,2,5,0]}
+  ],
+  maxVal:32, height:210
+});
+
+hStackedBar('chart-honours', [
+  {label:'Prof C S Yajnik', segs:[{value:4,color:'var(--amber)'}], total:4},
+  {label:'Dr Aditi Apte', segs:[{value:4,color:'var(--amber)'}], total:4},
+  {label:'Dr Rutuja Patil', segs:[{value:4,color:'var(--amber)'}], total:4},
+  {label:'Dr Sadanand Naik', segs:[{value:3,color:'var(--amber)'}], total:3},
+  {label:'Dr Ashish Bavdekar', segs:[{value:1,color:'var(--amber)'}], total:1},
+  {label:'Dr Kiruthiga K.G.', segs:[{value:1,color:'var(--amber)'}], total:1},
+  {label:'Ms Himangi Lubree', segs:[{value:1,color:'var(--amber)'}], total:1},
+  {label:'Ms Rucha Wagh', segs:[{value:1,color:'var(--amber)'}], total:1},
+], 4);
+
+dotRow('chart-batches', 16, true, 17, 'var(--teal)', 'var(--coral)');
+dotRow('chart-pgdcr', 4, true, 5, 'var(--amber)', 'var(--coral)');
+armGrid('chart-armgrid');
+
+/* ================= ICONS ================= */
+const ICONS = {
+  pulse: `<polyline points="2,24 11,24 15,9 21,39 27,13 31,24 46,24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  microscope: `<line x1="14" y1="42" x2="34" y2="42" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    <line x1="24" y1="42" x2="24" y2="34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M18 34 L26 10" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <circle cx="27.5" cy="8" r="3.4" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <path d="M13 34 h11" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M11 28 q7 -5 14 0" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/>`,
+  people: `<circle cx="17" cy="15" r="5.5" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <path d="M8 35 q0 -11 9 -11 q9 0 9 11" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <circle cx="33" cy="13" r="4.6" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <path d="M26 33 q1 -9 9 -9 q8 0 9 10" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/>`,
+  book: `<path d="M6 10 q9 -4 18 0 v28 q-9 -4 -18 0 Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+    <path d="M42 10 q-9 -4 -18 0 v28 q9 -4 18 0 Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>`,
+  network: `<circle cx="24" cy="10" r="4" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <circle cx="10" cy="35" r="4" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <circle cx="38" cy="35" r="4" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <circle cx="24" cy="25" r="3.4" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <line x1="24" y1="14" x2="24" y2="22" stroke="currentColor" stroke-width="2"/>
+    <line x1="21.5" y1="27.5" x2="13" y2="32.5" stroke="currentColor" stroke-width="2"/>
+    <line x1="26.5" y1="27.5" x2="35" y2="32.5" stroke="currentColor" stroke-width="2"/>`,
+  heart: `<path d="M24 41 C9 30 4 22 4 14.5 C4 8 9 4 14.5 4 C19 4 22.5 7 24 10.5 C25.5 7 29 4 33.5 4 C39 4 44 8 44 14.5 C44 22 39 30 24 41 Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>`,
+  award: `<circle cx="24" cy="16" r="10" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <path d="M18 25 L14 44 L24 38 L34 44 L30 25" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>`,
+  gradcap: `<path d="M4 17 L24 9 L44 17 L24 25 Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+    <path d="M14 21 v9 q10 6 20 0 v-9" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+    <line x1="44" y1="17" x2="44" y2="29" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>`,
+  flask: `<path d="M19 6 h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 6 v11 L8 38 q-2 4 3 4 h26 q5 0 3 -4 L28 17 V6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+    <line x1="13.5" y1="28" x2="34.5" y2="28" stroke="currentColor" stroke-width="2"/>`,
+  projects: `<rect x="7" y="9" width="14" height="11" rx="2" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <rect x="27" y="9" width="14" height="11" rx="2" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <rect x="17" y="30" width="14" height="11" rx="2" stroke="currentColor" stroke-width="2.2" fill="none"/>
+    <line x1="14" y1="20" x2="22" y2="30" stroke="currentColor" stroke-width="2.2"/>
+    <line x1="34" y1="20" x2="26" y2="30" stroke="currentColor" stroke-width="2.2"/>`,
+  outreach: `<path d="M8 22 h7 l15 -8 v20 l-15 -8 H8 Z" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+    <path d="M15 28 l3 12 h6 l-3 -12" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+    <path d="M36 18 q5 4 0 8 M40 14 q9 6 0 16" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/>`
+};
+
+document.querySelectorAll('.page[data-icon]').forEach(page => {
+  const key = page.getAttribute('data-icon');
+  const shape = ICONS[key];
+  if(!shape) return;
+
+  const bg = document.createElementNS(NS,'svg');
+  bg.setAttribute('viewBox','0 0 48 48');
+  bg.setAttribute('class','bg-icon');
+  bg.innerHTML = shape;
+  page.insertBefore(bg, page.firstChild);
+
+  const h2 = page.querySelector('.section-title');
+  if(h2){
+    const hIcon = document.createElementNS(NS,'svg');
+    hIcon.setAttribute('viewBox','0 0 48 48');
+    hIcon.setAttribute('class','head-icon');
+    hIcon.innerHTML = shape;
+    h2.insertBefore(hIcon, h2.firstChild);
+  }
+});
+
+/* ================= COUNT-UP ================= */
+function countUp(elm){
+  if(elm.dataset.done) return;
+  elm.dataset.done = '1';
+  const target = parseInt(elm.getAttribute('data-count'), 10);
+  const dur = 1100, start = performance.now();
+  function step(now){
+    const p = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - p, 3);
+    elm.textContent = Math.round(eased * target).toLocaleString('en-IN');
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ================= SCROLL REVEAL ================= */
+document.querySelectorAll('.page').forEach(page => {
+  const targets = page.querySelectorAll('.section-head, .vitals, .card, table.data-table, .rflex, [id^="chart-"]');
+  targets.forEach((t, i) => { t.classList.add('reveal'); t.style.setProperty('--d', (Math.min(i,7)*70)+'ms'); });
+});
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      entry.target.querySelectorAll('.count').forEach(countUp);
+      io.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.12});
+
+if(reduceMotion){
+  document.querySelectorAll('.page').forEach(p => { p.classList.add('in'); p.querySelectorAll('.count').forEach(countUp); });
+} else {
+  document.querySelectorAll('.page').forEach(p => io.observe(p));
+}
+</script>
+</body>
+</html>
